@@ -60,18 +60,12 @@ export function _saveDeck(title) {
   })
 }
 
-export function _addQuestionToDeck(deckID, question, answer) {
+export function _addQuestionToDeck(deckID, question) {
   return new Promise((res, rej) => {
-    const newQuestion = {
-      question: question,
-      answer: answer
-    }
-
-
     setTimeout(() => {
-      decks[deckID].questions.push(newQuestion)
+      decks[deckID].questions.push(question)
 
-      res(newQuestion)
+      res([deckID, question])
     }, 500)
   })
 }
