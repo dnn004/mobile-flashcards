@@ -1,3 +1,7 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const FLASHCARDS_STORAGE_KEY = 'MobileFlashcards:decks'
+
 let decks = {
   'xj352vofupe1dqz9emx13r': {
     id: 'xj352vofupe1dqz9emx13r',
@@ -25,47 +29,16 @@ let decks = {
   }
 }
 
-function generateUID () {
+export function generateUID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
-export function _getDecks() {
-  return new Promise((res, rej) => {
-    setTimeout(() => res({...decks}), 1000)
-  })
+function setDummyData() {
+  AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks))
 }
 
-export function _getDeck(id) {
-  return new Promise((res, rej) => {
-    setTimeout(() => res(decks.id), 500)
-  })
-}
-
-export function _saveDeck(title) {
-  return new Promise((res, rej) => {
-    const newDeck = {
-      id: generateUID(),
-      title: title,
-      questions: []
-    }
-
-    setTimeout(() => {
-      decks = {
-        ...decks,
-        [newDeck.id]: newDeck
-      }
-
-      res(newDeck)
-    }, 500)
-  })
-}
-
-export function _addQuestionToDeck(deckID, question) {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      decks[deckID].questions.push(question)
-
-      res([deckID, question])
-    }, 500)
-  })
+export function formatDecks(results) {
+  return results == null
+    ? setDummyData()
+    : results
 }

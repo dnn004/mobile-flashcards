@@ -1,35 +1,53 @@
 import {
-  _getDecks,
-  _getDeck,
-  _saveDeck,
-  _addQuestionToDeck
+  formatDecks,
+  FLASHCARDS_STORAGE_KEY,
+  generateUID
 } from './_DATA.js'
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ADD_QUESTION from '../actions'
 
 export function getInitialData () {
-  return Promise(_getDecks()).then(decks)
-}
-
-export function getDeck() {
-  return Promise(_getDeck()).then(deck)
+  return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
+    .then(results => formatDecks(JSON.parse(results)))
 }
 
 export function postDeck (title) {
-  return _saveDeck(title)
+  const newDeck = {
+    id: generateUID(),
+    title: title,
+    questions: []
+  }
+
+  return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
+    [newDeck.id]: newDeck
+  })).then(AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY))
+    .then(results => JSON.parse(results)[newDeck.id])
+}
+
+export function deleteDeck(id) {
+  return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
+    .then(decks => {
+      decks = JSON.parse(decks)
+      delete decks[id]
+      AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks))
+    })
+    .then(() => AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY))
+    .then(results => JSON.parse(results))
 }
 
 export function postQuestion (deckID, question, answer) {
-  return (dispatch, getState) => {
-
-    let question = {
-      question: question,
-      answer: answer
-    }
-
-    return _addQuestionToDeck(deckID, question)
-    .then(([deckID, question]) => ({deckID, question}) => dispatch(ADD_QUESTION))
+  let newQuestion = {
+    question: question,
+    answer: answer
   }
-  
+
+  return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
+        .then(decks => {
+          decks = JSON.parse(decks)
+          decks[deckID].questions.push({
+            question: question,
+            answer: answer
+          })
+          AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks))
+        })
+        .then(() => [deckID, newQuestion])
 }

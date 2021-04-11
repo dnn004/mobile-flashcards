@@ -1,7 +1,7 @@
 import {
   RECEIVE_DECKS,
   ADD_DECK,
-  RECEIVE_DECK,
+  REMOVE_DECK,
   ADD_QUESTION
 } from '../actions'
 
@@ -17,15 +17,18 @@ function decks (state = {}, action) {
         ...state,
         [action.deck.id]: action.deck
       }
-    case RECEIVE_DECK :
+    case REMOVE_DECK:
       return {
         ...state,
-        [action.deck.id]: action.deck
+        ...action.decks
       }
     case ADD_QUESTION :
       return {
         ...state,
-        ...[action.deckID].questions.push(action.question)
+        [action.deckID]: {
+          ...[action.deckID],
+          questions: [...state[action.deckID].questions, action.question]
+        }
       }
     default :
       return state

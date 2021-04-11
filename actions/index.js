@@ -1,7 +1,8 @@
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
-export const RECEIVE_DECK = 'RECEIVE_DECK'
 export const ADD_QUESTION = 'ADD_QUESTION'
+export const REMOVE_DECK = 'REMOVE_DECK'
+
 
 export function receiveDecks (decks) {
   return {
@@ -17,17 +18,17 @@ export function addDeck (deck) {
   }
 }
 
-export function receiveDeck (deck) {
+export function removeDeck(decks) {
   return {
-    type: RECEIVE_DECK,
-    deck
+    type: REMOVE_DECK,
+    decks,
   }
 }
 
-export function addQuestion (question) {
+export function addQuestion(deckID, question) {
   return {
     type: ADD_QUESTION,
-    deckID: question.deckID,
-    question: question.question
+    deckID: deckID,
+    question: question
   }
 }
