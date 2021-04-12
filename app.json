@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "mobile-flashcards",
-    "slug": "mobile-flashcards",
+    "description": "Make flashcards and quiz yourself with ease!",
+    "slug": "mobile-flashcards-dnn004",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,14 +18,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "mobile.flashcards.dnn004"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "package": "mobile.flashcards.dnn004",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
