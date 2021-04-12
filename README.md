@@ -5,8 +5,11 @@ This app is for creating flashcard decks to quiz oneself.
 The user can create decks, add cards (questions and answers) to each deck, quiz,
 and delete decks. The app also reminds the user to quiz themselves if they have
 not done so before 8pm of that day.
+
+This app is built for both Android and iOS. However, it has only been tested on
+an Android device.
 ___
-Set Up Steps:   
+Set Up Steps:
 1. Download and install the Expo app from the Google Play Store (Android) or the App Store (iOS)
 2. Be in the project directory
 3. Run the command `npm install`
