@@ -54,7 +54,7 @@ class Quiz extends Component {
         'No Answer',
         'Answer the question to move to the next card!',
         [
-          { text: 'OK', onPress: () => console.log('OK Pressed') }
+          { text: 'OK' }
         ]
       )
     }

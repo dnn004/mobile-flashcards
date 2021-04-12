@@ -16,7 +16,6 @@ class DeckDetailed extends Component {
     const { dispatch, navigation, route } = this.props
     deleteDeck(route.params.id)
       .then(decks => {
-        console.log(decks)
         dispatch(removeDeck(decks))
       })
       .then(this.setState({
