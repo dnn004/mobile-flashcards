@@ -3,7 +3,6 @@ export const ADD_DECK = 'ADD_DECK'
 export const ADD_QUESTION = 'ADD_QUESTION'
 export const REMOVE_DECK = 'REMOVE_DECK'
 
-
 export function receiveDecks (decks) {
   return {
     type: RECEIVE_DECKS,

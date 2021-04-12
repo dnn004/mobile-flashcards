@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const FLASHCARDS_STORAGE_KEY = 'MobileFlashcards:decks'
 
@@ -24,6 +24,16 @@ let decks = {
       {
         question: 'What is a closure?',
         answer: 'The combination of a function and the lexical environment within which that function was declared.'
+      }
+    ]
+  },
+  'am8ehyc8byjqgar0jgpub9': {
+    id: 'am8ehyc8byjqgar0jgpub9',
+    title: 'Life',
+    questions: [
+      {
+        question: 'What is the answer to life?',
+        answer: '42'
       }
     ]
   }

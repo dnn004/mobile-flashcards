@@ -3,7 +3,7 @@ import {
   FLASHCARDS_STORAGE_KEY,
   generateUID
 } from './_DATA.js'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export function getInitialData () {
   return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
@@ -19,8 +19,7 @@ export function postDeck (title) {
 
   return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
     [newDeck.id]: newDeck
-  })).then(AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY))
-    .then(results => JSON.parse(results)[newDeck.id])
+  })).then(() => newDeck)
 }
 
 export function deleteDeck(id) {
@@ -29,9 +28,8 @@ export function deleteDeck(id) {
       decks = JSON.parse(decks)
       delete decks[id]
       AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks))
+      return decks
     })
-    .then(() => AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY))
-    .then(results => JSON.parse(results))
 }
 
 export function postQuestion (deckID, question, answer) {

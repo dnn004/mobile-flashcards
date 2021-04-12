@@ -19,14 +19,13 @@ function decks (state = {}, action) {
       }
     case REMOVE_DECK:
       return {
-        ...state,
         ...action.decks
       }
     case ADD_QUESTION :
       return {
         ...state,
         [action.deckID]: {
-          ...[action.deckID],
+          ...state[action.deckID],
           questions: [...state[action.deckID].questions, action.question]
         }
       }

@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { View, Alert } from 'react-native'
 import { connect } from 'react-redux'
-
-import { Input } from 'react-native-elements'
-import { Button } from 'react-native-elements'
+import { Input, Button } from 'react-native-elements'
 import { postQuestion } from '../utils/api'
-
 import { addQuestion } from '../actions'
 
 class NewQuestion extends Component {
@@ -15,10 +12,19 @@ class NewQuestion extends Component {
   }
 
   submit = () => {
+    if(this.state.question === '' || this.answer === ''){
+      Alert.alert(
+        'Blank',
+        'Neither question or answer can be empty!',
+        [
+          { text: 'OK' }
+        ]
+      )
+      return
+    }
+    const { dispatch, navigation, route } = this.props
 
-    const { dispatch } = this.props
-
-    const deckID = this.props.route.params.id
+    const deckID = route.params.id
     postQuestion(deckID, this.state.question, this.state.answer)
       .then(([deckID, newQuestion]) => {
         dispatch(addQuestion(deckID, newQuestion))
@@ -29,23 +35,28 @@ class NewQuestion extends Component {
       answer: '',
     }))
 
-    this.props.navigation.navigate('Deck', { id: deckID })
+    navigation.navigate('Deck', { id: deckID })
   }
 
   render() {
     return (
-      <View>
+      <View style={{alignItems: 'center'}}>
         <Input
-          placeholder="Question"
+          placeholder='Question'
           onChangeText={value => this.setState({ question: value })}
+          autoFocus={true}
         />
         <Input
-          placeholder="Answer"
+          placeholder='Answer'
           onChangeText={value => this.setState({ answer: value })}
         />
         <Button
-          title="Submit"
-          type="solid"
+          buttonStyle={{
+            height: 50,
+            width: 200
+          }}
+          title='Submit'
+          type='solid'
           raised
           onPress={this.submit}
         />
@@ -55,10 +66,8 @@ class NewQuestion extends Component {
 
 }
 
-function mapStatetoProps(decks) {
-  return {
-    decks
-  }
+function mapStatetoProps() {
+  return {}
 }
 
 export default connect(mapStatetoProps)(NewQuestion)

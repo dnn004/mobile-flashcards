@@ -1,12 +1,13 @@
-// utils/colors.js
-
 export const darkPurple = '#3700B3'
-export const purple = '#6200EE'
-
-export const gray = '#757575'
+export const purple = '#c266ff'
+export const gray = '#bfbfbf'
 export const white = '#fff'
-export const red = '#b71845'
-export const orange = '#f26f28'
-export const blue = '#4e4cb8'
+export const lightRed = '#ff8080'
+export const orange = '#ffcc80'
+export const blue = '#80ccff'
 export const lightPurp = '#7c53c3'
-export const pink = '#b93fb3'
+export const pink = '#ff80ff'
+export const black = '#000000'
+export const green = '#00d676'
+export const red = '#b71845'
+export const lightGreen = '#80ffbf'
