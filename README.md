@@ -16,3 +16,4 @@ Set Up Steps:
 4. Run the command `expo start` or `npm start`
 5. Open the Expo app on your mobile phone
 6. Scan the QR code presented in the terminal or in the opened website tab
+7. If you're using WSL2, switch the browser tab with Expo to "Tunnel" mode and then scan the QR code
